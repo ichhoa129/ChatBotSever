@@ -126,8 +126,7 @@ function receivedPostback(event) {
 //  sendTextMessage(senderID, "Postback called");
   switch(payload){
       case'GET_STARTED':
-      sendTextMessage(senderID,"EduBot xin chào bạn! còn không mau donate !!!");
-      InitBlock(senderID);
+      sendGetStarted(senderID);
       break;
       case'BanThi':
       BanBlock(senderID);
@@ -234,8 +233,8 @@ var server = app.listen(process.env.PORT || 3000, function () {
   console.log("Listening on port %s", server.address().port);
 });
 
-
-function BanBlock(recipientId) {             //ban thi
+// nhấn button Bắt đầu rồi sẽ hiện ra các lĩnh vực 
+function linhVucBlock(recipientId) {             //ban thi
   var messageData = {
     recipient: {
       id: recipientId
@@ -245,19 +244,19 @@ function BanBlock(recipientId) {             //ban thi
         type: "template",
         payload: {
           template_type: "button",
-          text: " 🙈🙈🙉 Bạn thi ban nào 🙉🙊🙊",
+          text: " 🙈🙈🙉 Bạn có thiên hướng về lĩnh vực nào nhỉ ?🙉🙊🙊",
           buttons:[{
               type: "postback",
-              title: "Ban Xã Hội  ",
-              payload: "BanXaHoi"
+              title: "Tự Nhiên  ",
+              payload: "tunhien"
           },       {
             type: "postback",
-            title: "Ban Tự Nhiên",
-            payload: "BanTuNhien"
+            title: "Xã Hội",
+            payload: "xahoi"
           }, {
             type: "postback",
-            title: "Cả hai ban",
-            payload: "HaiBan"
+            title: "Văn Hóa Nghệ Thuật",
+            payload: "nghethuat"
           } 
           ]
         }
@@ -267,7 +266,9 @@ function BanBlock(recipientId) {             //ban thi
 
   callSendAPI(messageData);
 }
-function InitBlock(recipientId) {             //ban thi
+ //Khi nhấn vào Lĩnh vực tự nhiên sẽ hiện ra nhóm ngành
+function linhVucTuNhien(recipientId) {            
+  request
   var messageData = {
     recipient: {
       id: recipientId
@@ -277,19 +278,19 @@ function InitBlock(recipientId) {             //ban thi
         type: "template",
         payload: {
           template_type: "button",
-          text: " 🙈🙈🙉 Mày muốn gì ? 🙉🙊🙊",
+          text: " 🙈🙈🙉 Tiếp theo, để tư vấn rõ hơn, bạn hãy cho chúng tôi biết nhóm ngành mà bạn thích học 🙉🙊🙊",
           buttons:[{
               type: "postback",
-              title: "Ban Thi  ",
-              payload: "BanThi"
+              title: "Logic-Tính Toán ",
+              payload: "logictinhtoan"
           },       {
             type: "postback",
-            title: "Ngành",
-            payload: "Nganh"
+            title: "Thiên Nhiên-",
+            payload: "thiennhien"
           }, {
             type: "postback",
-            title: "Trường thi",
-            payload: "Truong"
+            title: "Kinh Doanh",
+            payload: "kinhdoanh"
           } 
           ]
         }
@@ -299,3 +300,203 @@ function InitBlock(recipientId) {             //ban thi
 
   callSendAPI(messageData);
 }
+ //Khi nhấn vào Lĩnh vực xã hội sẽ hiện ra nhóm ngành
+function linhVucXaHoi(recipientId) {            
+  request
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: " 🙈🙈🙉 Tiếp theo, để tư vấn rõ hơn, bạn hãy cho chúng tôi biết nhóm ngành mà bạn thích học  🙉🙊🙊",
+          buttons:[{
+              type: "postback",
+              title: "Biểu Đạt Ngôn Ngữ ",
+              payload: "bieudatngonngu"
+          },       {
+            type: "postback",
+            title: "Giao Tiếp",
+            payload: "giaotiep"
+          }
+          ]
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
+}
+//Khi nhấn vào Lĩnh vực xã hội sẽ hiện ra nhóm ngành
+function linhVucVanHoaNgheThuat(recipientId) {            
+  request
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: " 🙈🙈🙉 Tiếp theo, để tư vấn rõ hơn, bạn hãy cho chúng tôi biết nhóm ngành mà bạn thích học  🙉🙊🙊",
+          buttons:[{
+            type: "postback",
+            title: "Văn hóa - Du Lịch",
+            payload: "vanhoadulich"
+          }, {
+            type: "postback",
+            title: "Thể Thao",
+            payload: "thethao"
+          } 
+          ]
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
+}
+//Khi nhấn vào Lĩnh vực xã hội sẽ hiện ra nhóm ngành
+function logicTinhToan(recipientId) {            
+  request
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: " 🙈🙈🙉 Tiếp theo hãy cùng chọn khối thi sở trường của bạn nào !!!🙉🙊🙊",
+          buttons:[{
+              type: "postback",
+              title: "Khối: A,A1,K ",
+              payload: "AAK"
+          },       {
+            type: "postback",
+            title: "Khối: A,A1,D1",
+            payload: "AAD"
+          }, {
+            type: "postback",
+            title: "Khối: A",
+            payload: "A"
+          } 
+          ]
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
+}
+// hiện danh sách chọn nằm ngang 
+function sendQuickReply(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+
+    message: {
+      text: "TIMETABLE",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Mon",
+          payload: "Mon"
+        },
+        {
+          content_type: "text",
+          title: "Tue",
+          payload: "Tue"
+        },
+        {
+          content_type: "text",
+          title: "Wed",
+          payload: "Wed"
+        },
+        {
+          content_type: "text",
+          title: "Thu",
+          payload: "Thu"
+        },
+        {
+          content_type: "text",
+          title: "Fri",
+          payload: "Fri"
+        },
+        {
+          content_type: "text",
+          title: "Sat",
+          payload: "Sat"
+        },
+        {
+          content_type: "text",
+          title: "Sun",
+          payload: "Sun"
+        }
+      ]
+    }
+  };
+
+  console.log("quick test success");
+  callSendAPI(messageData);
+}
+// Khi nhấn BẮT ĐẦU thì hiện ra " lời chào " + button : Bắt đầu 
+function sendGetStarted(recipientId) {                                      
+  request(
+    {
+      url: "https://graph.facebook.com/v2.6/" + recipientId,
+      qs: {
+        access_token: process.env.PAGE_ACCESS_TOKEN,
+        fields: ""
+      },
+      method: "GET"
+    },
+    function(error, response, body) {
+      if (error) {
+        console.log("error getting username");
+      } else {
+        var bodyObj = JSON.parse(body);
+        var name = bodyObj.first_name;
+        var lname = bodyObj.last_name;
+        var pc = bodyObj.profile_pic;
+        var locale = bodyObj.locale;
+        var timezone = bodyObj.timezone;
+        var gender = bodyObj.gender;
+
+        //console.log(JSON.parse(body))
+
+        var messageData = {
+          recipient: {
+            id: recipientId
+          },
+          message: {
+            attachment: {
+              type: "template",
+              payload: {
+                template_type: "button",
+                text:
+                  "Chào mừng " +name +" đến với Trang Tư Vấn Tuyển Sinh Đà Nẵng. Hãy nhấn “Bắt đầu” để nhận được sự tư vấn từ Trang chúng tôi.",
+                buttons: [
+                  {
+                    type: "postback",
+                    title: "Bắt Đầu",
+                    payload: "start"
+                  }
+                ]
+              }
+            }
+          }
+        };
+        callSendAPI(messageData);
+      }
+    }
+  );
+} 
+
+
